@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h3>条件文</h3>
+  <textarea name="" id="" cols="50" rows="10">
+  var score = Number(prompt('请输入数字'))
+      if(score >=85 ){
+        alert('good')
+      }else if(score >= 70){
+        alert('not good')
+      }else{
+        alert('bad')
+      }
+  </textarea>
+  <p>水仙数(153 =>1*1*1 + 5*5*5 + 3*3*3 =153)</p>
+  <textarea name="" id="" cols="50" rows="12">
+    var num = Number(prompt('请输入数字'))
+    var a = parseInt(num / 100);
+    var b = parseInt((num / 10) % 10);
+    var c = parseInt(num % 10);
+    if (Math.pow(a, 3) + (Math.pow(b, 3)) + Math.pow(c, 3) == num) {
+      alert('是水仙数')
+    } else {
+      alert('不是水仙数')
+    }
+  </textarea>
+  <p>switch</p>
+  <textarea name="" id="" cols="50" rows="17">
+    var a = 10 ;
+    switch(a){
+      case 10:
+      console.log('a');
+      case 4 :
+      console.log('b');
+      case 88:
+      console.log('c');
+      break;
+      case 2:{
+        console.log('d');
+      default:
+      console.log('z');
+      }
+    }
+  </textarea>
+  <p>三元运算符</p>
+  <textarea name="" id="" cols="50" rows="10">
+    var age=24;
+    var type = age >= 18 ? 'adult'  : 'child'
+    alert(type);   //adult
+  </textarea>
+
+  <p>for循环</p>
+  <textarea name="" id="" cols="50" rows="10">
+    累加
+    for (var i = 0, sum = 0; i <= 5; i++) {
+      sum += i
+    }
+    console.log(sum);//15
+  </textarea>
+  <p>while循环</p>
+  <textarea name="" id="" cols="50" rows="21">
+    满足n*n>456789的最小整数
+    var i = 1;
+    var a = 0;
+    while (a < 456789) {
+      a = i * i
+      i++;
+    }
+    console.log(i);//677 但结果为676，677已经超过了 
+
+    do-while
+
+    var i = 0;
+    var a = 0;
+    do {
+      a = i * i
+      i++;
+    }
+    while (a < 456789)
+    console.log(i);
+  </textarea>
+  <p>break 中断</p>
+  <p>continue 跳过</p>
+  <h3>取得[a,b]的随机整数</h3>
+  <p>parseInt(Math.random()*(b-a+1))+a</p>
+  <p>猜数字demo(2~99)</p>
+  <textarea name="" id="" cols="50" rows="22">
+    var random = parseInt(Math.random() * 98) + 2;
+    var max = 100;
+    var min = 1;
+    while (true) {
+      var num = Number(prompt('请输入数字' + min + '~' + max));
+      if (num > random) {
+        alert('数字太大');
+        max = num;
+      } else if (num < random) {
+        alert('数字太小');
+        min = num;
+      } else {
+        alert('猜对了')
+        break;
+      }
+    }
+    console.log(random);
+  </textarea>
+
+
+  <script>
+    // var num = Number(prompt('请输入数字'))
+    // var a = parseInt(num / 100);
+    // var b = parseInt((num / 10) % 10);
+    // var c = parseInt(num % 10);
+    // if (Math.pow(a, 3) + (Math.pow(b, 3)) + Math.pow(c, 3) == num) {
+    //   alert('是水仙数')
+    // } else {
+    //   alert('不是水仙数')
+    // }
+
+    // for (var i = 0, sum = 0; i <= 5; i++) {
+    //   sum += i
+    // }
+    // console.log(sum); //15
+
+    // var i = 0;
+    // var a = 0;
+    // while (a < 456789) {
+    //   a = i * i
+    //   i++;
+    // }
+    // console.log(i);
+
+    // var i = 0;
+    // var a = 0;
+    // do {
+    //   a = i * i
+    //   i++;
+    // }
+    // while (a < 456789)
+    // console.log(i);
+
+    // var random = parseInt(Math.random() * 98) + 2;
+    // var max = 100;
+    // var min = 1;
+    // while (true) {
+    //   var num = Number(prompt('请输入数字' + min + '~' + max));
+    //   if (num > random) {
+    //     alert('数字太大');
+    //     max = num;
+    //   } else if (num < random) {
+    //     alert('数字太小');
+    //     min = num;
+    //   } else {
+    //     alert('猜对了')
+    //     break;
+    //   }
+    // }
+    // console.log(random);
+
+    // var i = 1;
+    // var a = 1;
+    // while (i < 7) {
+    //   a *= i;
+    //   i++;
+    // }
+    // console.log(a);
+    // var i = 1;
+    // var a = 1;
+    // var b = 1;
+    // var sum = 0;
+    // var n = Number(prompt('请输入数字'))
+    // while (i < n + 1) {
+    //   a *= i;
+    //   b *= 2 * i + 1;
+    //   var d = a / b;
+    //   sum += d;
+    //   i++;
+    // }
+    // var c = (sum + 1) * 2
+    // alert(c)
+  </script>
+</body>
+
+</html>

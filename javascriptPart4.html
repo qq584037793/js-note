@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h3>関数</h3>
+  <p>function fun(){}</p>
+  <p>var fun = function(){}</p>
+  <p>fun()</p>
+  <p>arguments 为实参列表</p>
+  <textarea name="" id="" cols="1000" rows="100">
+    //深克隆
+    let obj1 = {
+      name: 'tony',
+      age: 12,
+      address: {
+        city: 'xiamen',
+      },
+      post: [1, 2, 3, 4, 5],
+    }
+    let obj2 = deepCopy(obj1)
+    obj2.name = 'tom'
+    obj2.post[0] = 2
+    console.log(obj1.name)
+    console.log(obj1.post[0])
+  
+    function deepCopy(obj) {
+      //1.判断类型
+      if (typeof obj !== 'object' || obj == null) {
+        return obj
+      }
+      //2.建个空数组或者对象
+      let result
+      if (result instanceof Array) {
+        result = []
+      }
+      result = {}
+      //3.循环递归
+      for (let key in obj) {
+        //查看原型链
+        if (obj.hasOwnProperty(key)) {
+          result[key] = deepCopy(obj[key]) //再帰関数
+        }
+      }
+      return result
+    }
+
+
+
+    //再帰関数 再帰関数とは、関数の処理の中で自分自身を呼び出す関数のことを指します。
+  function sum1(n) {
+    if (n <= 0) {
+      return 0
+    }
+    return n + sum1(n - 1)
+  };
+
+  function multi(n) {
+    if (n <= 1) {
+      return 1
+    }
+    return n * multi(n - 1)
+  };
+
+  console.log(sum1(10)); //55
+  console.log(multi(5)); //120
+
+
+
+  //閉鎖  スコープ （作用域）
+  function addCount() {
+    var count = 0;
+    return function () {
+      count = count + 1
+      console.log(count);
+    }
+  }
+  var fun1 = addCount();
+  var fun2 = addCount();
+  fun1(); //1
+  fun2(); //1
+  fun2(); //2
+  fun1(); //2
+
+
+  //预解析 函数提前
+  function 函数名() {
+
+  }
+  // 匿名函数 不会提升
+  var 函数名 = function () {
+
+  }
+  // 调用函数
+  fn()
+
+  //定义立即调用(IIFE)
+  (function () {
+
+  })();
+  </textarea>
+
+  <script>
+    // function jie(num) {
+    //   for (var i = 1, j = 1; i <= num; i++) {
+    //     j *= i;
+    //   }
+    //   return j
+    // }
+    // for (var a = 100; a < 1000; a++) {
+    //   var b = parseInt(a / 100);
+    //   var c = parseInt((a / 10) % 10);
+    //   var d = parseInt(a % 10);
+    //   if (a == jie(b) + jie(c) + jie(d)) {
+    //     console.log(a);
+    //   }
+    // }
+    // function fib(i) {
+    //   if (i == 0 || i == 1) return 1;
+    //   return fib(i - 2) + fib(i - 1)
+    // }
+  </script>
+</body>
+
+</html>

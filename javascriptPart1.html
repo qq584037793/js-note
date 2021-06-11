@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <p>ECMAScript(基準)</p>
+  <p>prompt()</p>
+  <p>alert('alert')</p>
+  <p>console.log('console.log')</p>
+  <p>変数ネイミング:アルファベット,数字,_,$,数字始まるNG</p>
+  <p>变量声明提升</p>
+  <h3>基本数据类型 プリミティブ型　Number,String,Boolean,undefined,null</h3>
+  <h3>Number</h3>
+  <p>typeof NaN; //number</p>
+  <p>typeof 11; //number</p>
+  <h3>String</h3>
+  <p>typeof '11'; //string</p>
+  <p>'a'+'b' //'ab'</p>
+  <p>''+'1' //'1'</p>
+  <p>'123'.length //3</p>
+
+  <h3>Stringメソッド</h3>
+  <p>'12345'.charAt(0) //1 查找指定位置字符(指定された位置にある文字を見つけます)</p>
+  <p>'12345'.substring(0,3) //123 a~bの文字[a,b) a>bはok　[b,a)自動調整ができます</p>
+  <p>'12345'.substring(0)) //12345 a以降の全部</p>
+  <p>'12345'.substr(2,2) //34 (a,b) aから長さはbの文字</p>
+  <p>'12345'.substr(2) //345 (a) a以降の全部</p>
+  <p>'12345'.substr(-2,2) //45 (-a,b) 後ろaから長さはbの文字</p>
+  <p>'12345'.slice(0,3) //123 a~bの文字[a,b) a>bはNG</p>
+  <p>'12345'.slice(-4,-1) //123 後ろa~bの文字[a,b) </p>
+  <p>'abc'.toUpperCase(); //ABC</p>
+  <p>'abc'.toLowCase(); //abc</p>
+  <p>'abcde'.indexOf('a') //0 a最初の位置</p>
+  <p>'abcde'.indexOf('z') //-1 ない場合return -1</p>
+
+  <h3>Boolean</h3>
+  <p>typeof true; //boolean</p>
+  <p>typeof false; //boolean</p>
+
+  <h3>undefined</h3>
+  <p>typeof undefined //undefined</p>
+
+  <h3>null</h3>
+  <p>typeof null //object</p>
+
+  <h3>type転換</h3>
+  <h4>他=>数字</h4>
+  <p>Number('123') //123</p>
+  <p>Number(true) //1</p>
+  <p>Number(false) //0</p>
+  <p>Number(undefined) //NaN</p>
+  <p>Number(null) //0</p>
+  <p>parseInt('3.74') //3 (不四舍五入)取整</p>
+  <p>parseInt('3.14is') //3</p>
+  <p>parseInt('a3.14') //NaN</p>
+  <p>parseFloat('3.99') //3.99 浮点数</p>
+
+  <h4>他=>文字列</h4>
+  <p>String(1234) //'1234'</p>
+  <p>(123).toString() //123</p>
+  <p>true.toString()</p>
+
+  <h4>他=>Boolean</h4>
+  <p>Boolean(0) //false</p>
+  <p>Boolean(NaN) //false</p>
+  <p>Boolean(Infinity) //true</p>
+  <p>Boolean(-Infinity) //true</p>
+  <p>Boolean('') //false</p>
+  <p>Boolean(undefined) //false</p>
+  <p>Boolean(null) //false</p>
+
+  <h3>演算子</h3>
+  <p>5%2 //1 余数</p>
+  <p>Math.pow(2,3) //8 (2*2*2)</p>
+  <p>Math.sqrt(81) //9 开平方</p>
+  <p>Math.sqrt(-81) //NaN</p>
+  <p>Math.ceil(2.4) //3 向上取整</p>
+  <p>Math.floor(2.4) //2 向下取整</p>
+  <p>Math.round(3.44) //3 四舍五入</p>
+  <p>Math.max(1,2,3,4) //4</p>
+  <p>Math.min(1,2,3,4) //1</p>
+  <p>2!=3 //true</p>
+  <p>5=='5' //true</p>
+  <p>5==='5' //false 比较值和类型</p>
+  <p>0==undefined //false </p>
+  <b>null==0 //false</b><br>
+  <b>undefined==null //true</b><br>
+  <b>NaN==NaN //false</b>
+  <p>undefined===null //false</p>
+  <p>isNaN(NaN) //true</p>
+  <p>isNaN(null) //false</p>
+  <p>isNaN(undefined) //true</p>
+  <p>!0 //true</p><br><br><br>
+  <h4>論理演算子</h4>
+  <p>3&&6 //6</p>
+  <p>undefined && 15 //undefined</p>
+  <p>15 && undefined //undefined</p>
+  <p>'' && 16 //''</p>
+  <p>NaN && undefined //NaN</p>
+  <p>看假的 都是真的看后面</p>
+  <br>
+  <p>3 || 6 //3</p>
+  <p>null || undefined //undefined</p>
+  <p>NaN || null //null</p>
+  <p>看真的 都是假的看后面</p>
+
+  <p>true && false //false</p>
+  <p>false && true //false</p>
+  <p>true || false //true</p>
+  <p>false || true //true</p>
+  <p>非=> 与 =>或</p>
+  <p>!true || true //true</p>
+  <p>3 && 4 || 5 && 6 </p><br>
+  <p>a++ ++a区别</p>
+  <textarea name="" id="" cols="30" rows="10">
+    var a = 3 ;
+    var b = a++ ; //先用在加
+    console.log(b); //3
+    console.log(a); //4
+    var a = 3 ;
+    var b = ++a; //先加在用
+    console.log(b); //4
+    console.log(a); //4
+  </textarea>
+
+
+
+
+
+
+
+
+  <script>
+    console.log(typeof ('' + '1'));
+    console.log('12345'.charAt(0));
+    console.log('12345'.substring(0, 3));
+    console.log('12345'.substring(0));
+    console.log('12345'.substr(2, 2));
+    console.log('12345'.substr(2));
+    console.log('12345'.substr(-2, 2));
+    console.log('12345'.slice(-4, -1));
+    console.log('abc'.toUpperCase());
+    console.log(Boolean(Infinity));
+    console.log(parseInt('3.14is'));
+    console.log(parseInt('a3.14'));
+    console.log((123).toString());
+    console.log(true.toString());
+    console.log(undefined && 15);
+    console.log(null || undefined);
+  </script>
+</body>
+
+</html>

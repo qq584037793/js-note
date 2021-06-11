@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h3>Object(k:v)</h3>
+  <textarea name="" id="" cols="50" rows="15">
+    var obj={
+      a:1,
+      b:2,
+      c:3,
+      sayHello:function(){
+        console.log(1);
+      }
+    }
+    var key='b',
+    obj.a;
+    obj[c]
+    console.log(obj.key);  //undefined
+    console.log(obj.[key]); //2
+    obj.d=4;
+    obj.sayHello();
+    delete obj.a;
+
+    for(var k in obj){
+      console.log('value:'+ obj[k]);
+    }
+  </textarea>
+
+  <h3>this指向(取决于谁调用)</h3>
+  <textarea name="" id="" cols="50" rows="15">
+    var obj={
+      a:1,
+      b:2,
+      c:,
+      sayHello:function(){
+        console.log(this.a);
+      }
+    }
+    obj.sayHello(); //1   obj调用
+    var fun=obj.sayHello;
+    fun(); //undefined   无调用 指向window
+  </textarea>
+  <ol>总结
+    <li>obj.fun() //调用者obj</li>
+    <li>fun() //全局</li>
+    <li>arr[i]() //调用者arr</li>
+    <li>(function(){}) //同2</li>
+    <li>setInterval(fun(),time) //同2</li>
+    <li>setTimeout(fun(),time) //同2</li>
+    <li>DOM元素.onclick=function(){} //调用者Dom元素</li>
+  </ol>
+
+  <h3>构造函数</h3>
+  <textarea name="" id="" cols="30" rows="10">
+    function People(name,age,sex){
+      this.name=name;
+      this.age = age ;
+      this.sex=sex
+    }
+    var xiao =new People('xiao',12,man)
+  </textarea>
+
+  <h3>call apple</h3>
+  <textarea name="" id="" cols="30" rows="10">
+    //对象遍历for in
+    //call apply
+    fun().call( 上下文 ,参数1，参数2)
+    fun().apply( 上下文 ,[参数1,参数2])
+    Object.hasOwnProperty()
+    console.log(Math.round(3.14)); //四舍五入
+    var arr = [1, 2, 3, 4, 5, 6, 7, 8]
+    var max = Math.max.apply(null, arr);
+    console.log(max); //8最大值
+    console.log(parseInt(Math.random() * (b - a + 1) + a)); //随机得到[a,b]区间的整数
+    new Date(2020, 11, 1) //2020.12.1 
+    parse() //返回时间戳
+  </textarea>
+  <h3>原型链</h3>
+  <p>每个class 都有显示原型prototype (class实际是函数)<br>
+    每个实例都有隐形原型__proto__<br>
+    实例__proto__对应class的prototype<br>
+    プロトタイプ__proto__プロパティでたどれます</p>
+  <p>
+    プロトタイプメリット:オブジェクトがプロトダイブに定義されているプロパティを継承できる</p>
+  <p>xiao.hasOwnProperty('name') //true</p>
+  <p>'name' in xiao //true</p>
+  <p>People.prototype.sayHello=function(){console.log(11);}</p>
+
+  <h3>Date</h3>
+  <p>getDate()</p>
+  <p>getDay()</p>
+  <p>getMath() //0~11</p>
+  <p>getFullYear()</p>
+  <p>getHours()</p>
+  <p>getMinutes()</p>
+  <p>getSeconds()</p>
+  <p>getTime() or Date.parse() //时间戳</p>
+
+  <h3>正则表达式(普通ネット検索すればいい)</h3>
+  <textarea name="" id="" cols="30" rows="10">
+    var z = /^ $/ //开头 结尾
+    var z1 = /^\d$/
+    var z = new RegExp('^\\d$')
+    \ d //匹配数字
+    \ D //匹配非数字
+    \ w //匹配字母 数字 下划线
+    \ W //匹配非字母 数字 下划线
+    \ s //匹空白字符
+      . //任意字符
+    w.test()
+    exec()
+    search('1')
+    match()
+    replace()
+    split() // 把字符串分割从数组
+  </textarea>
+  <script>
+    // var obj = {
+    //   a: 1,
+    //   b: 2,
+    //   c: 3,
+    //   sayHello: function () {
+    //     console.log(this.a);
+    //   }
+    // }
+    // obj.sayHello();
+    // var fun = obj.sayHello;
+    // fun();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h3>Dom</h3>
+  <ul>nodeType
+    <li>
+      1:元素节点
+    </li>
+    <li>
+      3:文字节点
+    </li>
+    <li>
+      8:注释节点
+    </li>
+    <li>
+      9:Document节点
+    </li>
+    <li>
+      10:DTD节点
+    </li>
+  </ul>
+
+  <ul>get
+    <li>document.getElementById()</li>
+    <li>document.getElementByTagName()</li>
+    <li>document.getElementByClassName()</li>
+    <li>document.querySelector('#box1 .spec')</li>
+    <li>document.querySelectorAll()</li>
+  </ul>
+
+  <ul>node(有文本节点)
+    <li>childNodes</li>
+    <li>parentNode</li>
+    <li>firstChild</li>
+    <li>lastChild</li>
+    <li>previousSibling 前一个兄弟节点</li>
+    <li>nextSibling 后一个兄弟节点</li>
+  </ul>
+
+  <ul>node Element(只考虑元素节点)
+    <li>childe</li>
+    <li>parentNode</li>
+    <li>firstElementChild</li>
+    <li>lastElementChild</li>
+    <li>previousElementSibling</li>
+    <li>nextElementSibling</li>
+  </ul>
+
+  <ul>node操作
+    <li>li.innerHTML</li>
+    <li>li.innerText</li>
+    <li>li.style.backgroundColor = 'red';</li>
+    <li>li.setAttribute('data-n', 10)</li>
+    <li>var n = li.getAttribute('data-n');</li>
+  </ul>
+
+  <ul>node Create..
+    <li>var newLi = document.createElement('p');</li>
+    <li>//刚创建的为孤儿节点，要挂再树上;<br>
+      ul.appendChild('newLi')<br>
+      ul.insertBefore('newLi', 'li')</li>
+    <li>li.removeChild('newLi');</li>
+    <li>//克隆 true 深克隆<br>
+      var newLi = li.cloneNode(true);</li>
+  </ul>
+
+  <ul>mouseEvent
+    <li>onclick</li>
+    <li>ondblclick</li>
+    <li>onmousedown</li>
+    <li>onmouseup</li>
+    <li>onmouseover //冒泡</li>
+    <li>onmouseenter //不冒泡</li>
+    <li>onmouseleave</li>
+  </ul>
+
+  <ul>keyboardEvent
+    <li>onkeypress</li>
+    <li>onkeydown</li>
+    <li>onkeyup</li>
+  </ul>
+
+  <ul>table
+    <li>onchange</li>
+    <li>onfocus</li>
+    <li>onblur</li>
+    <li>onsubmit</li>
+    <li>onreset</li>
+  </ul>
+
+  <ul>page
+    <li>onload</li>
+    <li>onunload</li>
+  </ul>
+
+  <p>li.addEventListener('click', function () {}, false); //不冒泡</p>
+  <p>事件委托</p>
+  <textarea name="" id="" cols="50" rows="10">
+    li.onclick = function (e) {
+      e.target.style.color = 'red';
+      e.preventDefault(); //阻止默认行为
+      e.stopPropagation(); //阻止事件传播
+  }</textarea>
+
+  <ul>鼠标位置
+    <li>clientX //相对于阅览器</li>
+    <li>clientY</li>
+    <li>pageX //相对于整张网页</li>
+    <li>pageY</li>
+    <li>offsetX //相对于事件源</li>
+    <li>offsetY</li>
+  </ul>
+
+  <p>定时器</p>
+  <textarea name="" id="" cols="50" rows="15">
+    var time = setInterval(function () {
+
+    }, 2000);//定时器
+  
+    clearInterval(time);
+  
+    setTimeout(function () {
+  
+    }, 20)//延时器
+  
+    clearTimeout();
+  </textarea>
+
+  <h3>BOM</h3>
+  <p>document.documentElement.innerHeight</p>
+  <p>document.documentElement.innerWidth</p>
+  <p>document.documentElement.outHeight</p>
+  <p>document.documentElement.outWidth</p>
+  <p>document.documentElement.clientWidth</p>
+  <p>document.documentElement.scrollTop</p>
+  <p>window.onresize</p>
+  <p>window.navigator</p>
+  <p>history.back()</p>
+  <p>history.go(-1)</p>
+  <p>window.location.reload(true)</p>
+</body>
+
+</html>

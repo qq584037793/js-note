@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h3>Symbol</h3>
+  <textarea name="" id="" cols="130" rows="30">
+    * Symbol 是 ES6 中引入的一种新的基本数据类型，用于表示一个独一无二的值。
+    * Symbol 是基本数据类型，调用 Symbol 时不可以使用 new 关键字。
+                const a = Symbol();
+                console.log(a);  //Symbol()
+                console.log(typeof a) // Symbol
+    * 基本语法
+        * let a = Symbol();
+        * 可传入值
+                    let a = Symbol("symbol1");
+                    let b = Symbol("symbol2");
+                    console.log(a); //Symbol("symbol1")
+                    console.log(b); //Symbol("symbol2")
+    * Symbol 属性的遍历
+        * 以 Symbol 类型的变量作为对象属性时，该属性不会出现在 for ... in、for ... of 循环中
+                    let s1 = Symbol('a');
+                    let s2 = Symbol('b');
+                    // 由于 s1 和 s2 是一个变量，而不是字符串，因此需要使用中括号括起来（否则它会被当做字符串使用）
+                    let a = {
+                        name: "夕山雨",
+                        [s1]: 24,
+                        [s2]: function(){}
+                    }
+                    for(let i in a){
+                        cosnole.log(a[i]);  // ‘夕山雨'
+                    }
+    * Symbol.for() 和 Symbol.keyFor() 方法
+        * Symbol.for():Symbol 提供的一种可以创建相同 Symbol 的机制，就是使用 Symbol.for() 方法进行注册
+            * 通过该方法生成 Symbol 会在当前作用域中注册制定的描述符，之后再次通过 Symbol.for() 传入相同的描述符时，就可以得到相同的 Symbol 值，所以变量 a 和变量 b 时相同的。 
+                    let a = Symbol.for('imooc');  //全局注册了以"imooc"为描述符的 Symbol
+                    //由于描述符"imooc"已被注册到全局，因此这里创建的 Symbol 与上面是同一个
+                    let b = Symbol.for('imooc');  
+                    console.log(a === b) // true
+        * Symbol.keyFor()：返回一个全局注册的 Symbol 的描述符
+                    let a = Symbol.for('imooc');
+                    let res = Symbol.keyFor(a)
+                    console.log(res) // imooc
+    * Symbol 的作用
+        * 由于每一个 Symbol 值都是不相等的，这意味着 Symbol 值可以作为标识符，用于对象的属性名，就能保证不会出现同名的属性。这对于一个对象由多个模块构成的情况非常有用，能防止某一个键被不小心改写或覆盖。
+                let s1 = Symbol();
+                let s2 = Symbol()
+                const obj = {
+                    age: 16,
+                    age: 19,
+                    [s1]: 'Hello!',
+                    [s2]: 'world'
+                };
+                console.log(obj)
+
+                //由于 age 是字符串类型的，同名属性会被覆盖，所以 obj 对象中只会有一个 age 属性，而 Symbol 值是唯一的，即使控制台中输出结果看起来是一样的，但他们并不表示同一个值，所以 obj 中 s1 和 s2 都为添加到 obj 对象中
+                // 为了方便区分，可以给 Symbol 值添加描述
+* 常用的内置 Symbol 值：Symbol.iterator
+    * 对象的 Symbol.iterator 属性，指向该对象的默认便利器方法，凡是具有 [Symbol.iterator] 方法的对象都是可遍历的，可以使用 for ... of循环一次输出对象的每个属性
+                for(var item of [1,2,3]){
+                  console.log(item); 依次输出 1，2，3
+                }
+* Symbol 与基本数据类型转换
+    1. Symbol 不能转成数字。
+        * 使用 Number() 方法会报错
+    2. 可以转成布尔值和字符串
+        * 使用 String() 、Boolean()
+                    let s1 = Symbol('1');
+                    console.log(typeof s1) // symbol
+                    let str = String(s1)
+                    console.log(typeof str) // string
+                    let bool = Boolean(s1)
+                    console.log(typeof bool) // boolean`
+* 总结
+    * 一般 Symbol 值就是为对象属性的键值，防止该属性被覆盖。使用 Symbol 作为对象属性时，需要使用方括号语法去访问对应的属性，而不是字符串。
+</textarea>
+
+  <h3>Iterator</h3>
+  <textarea name="" id="" cols="130" rows="30">
+    * Iterator
+    * Symbol.iterator（可遍历对象的生成方法） -> it（可遍历对象） -> it.next() -> it.next() -> ... (直到 done 为 true）
+                const it = [1,2][Symbol.iterator]();
+                console.log(it);        //Array Iterator
+                console.log(it.next());         //{value: 1, done: false}
+                console.log(it.next());         //{value: 2, done: false}
+                console.log(it.next());         //{value: undefined, done: true}
+                console.log(it.next());         //{value: undefined, done: true}
+* 为什么需要 Iterator 
+    * Iterator 遍历器是一个统一的遍历方式    
+* 如何更方便的使用 Iterator
+    * 一般不会直接使用 Iterator 去遍历
+    * for ... of 循环就是基于 Iterator 
+* for ... of 循环
+    * for...of 循环只会遍历出那些 done 为 false 时，对应的 value 的值
+                const arr = [1,2,3];
+                for(const item of arr){
+                    console.log(item);  // 1，2，3
+                }
+    * 与 break、continue 一起使用
+    * 如何在 for...of 中取得数组的索引及值
+        * keys() 得到的就是索引的可遍历对象，可以遍历出索引值
+        * values() 得到的是值得可遍历对象，可以遍历出值
+                    const arr = [1,2,3];
+                    console.log(arr.keys());
+                    for(const key of arr.keys()){
+                        console.log(key);   //0,1,2
+                    }
+                    // arr 还有个 values() 方法
+                    for(const val of arr.values()){
+                        console.log(val);   //1,2,3
+                    }
+    * 同时取出值和索引
+        * entries() 得到的是索引+值组成的数组的可遍历对象
+                    const arr = [1,2,3];
+                    for(const entries of arr.entries()){
+                        console.log(entries);   // [0,1],[1,2],[2,3]
+                    }
+* 原生可遍历与非原生可遍历
+    * 什么是可遍历
+        * 只要有 Symbol.iterator 方法，并且这个方法可以生成可遍历对象，就是可遍历的
+        * 只要可遍历，就可以使用 for...of 循环来统一遍历
+    * 原生可遍历
+        * 数组、字符串、Set、Map、函数的 arguments 参数、NodeList 
+    * 非原生可遍历
+        * 一般的对象，可以手动添加 Symbol.iterator，从而可遍历
+                    const obj = {
+                        0:'Alex',
+                        1:'male',
+                        length: 2
+                    };
+                    obj[Symbol.iterator] = Array.prototype[Symbol.iterator];
+                    for(const i of obj){
+                        console.log(i)
+                    }
+* 使用了 Iterator 的场合
+    * 数组的展开运算符
+    * 数组的解构赋值
+    * Set 和 Map 的构造函数 
+  </textarea>
+
+
+  <h3>es6 新增方法</h3>
+
+  <h4>String</h4>
+  <textarea name="" id="" cols="130" rows="30">
+    **includes() 方法**
+    * 定义：判断字符串中是否含有某些字符，返回布尔值
+    * 语法：str.includes(string,index)
+    * 参数：第一个参数是要查找的字符，第二个参数是开始搜索的位置（包含），默认 0 
+        * 例：‘abc'.inclueds('ab',0);   //true
+    **padStart() 方法和 padEnd() 方法**
+    * 定义：从前面或从后面补全字符串长度，返回新的字符串
+    * 语法：str.padStart(targetLength,string) str.padEnd(targetLength,string)
+        * 参数：第一个参数为目标长度，第二个参数为填补的字符串
+    * 注意事项：
+        1. 原字符串的长度，等于或大于最大长度（目标长度），不会消减原字符串，字符串补全不生效，返回原字符串
+            * 例：console.log('abc'.padStart(1,'0123456789'));   //'abc'
+        2. 用来补全的字符串与原字符串长度之和超过目标长度，截去超出位数的补全字符串，原字符串不动
+            * 例：console.log('abc'.padEnd(10,'0123456789'));   //'abc0123456'
+        3. 如果省略第二个参数，默认使用空格补全长度
+            * 例：console.log('x'.padEnd(4)); //'x   '
+    * 应用
+        * 显示日期格式
+    **trimStart() 方法和 trimEnd() 方法**
+    * 定义：清除字符串的首尾空格，中间的空格不会清除，返回一个新字符串，**不会修改原来的字符串**
+    * 语法：str.trimStart(); str.trimEnd(); 
+        * trimStart() === trimLeft()
+        * trimEnd() === trimRight()
+        * trim() 首尾空格一起去除
+    * 应用
+        * 多用于表单
+  </textarea>
+
+  <h4>Array</h4>
+  <textarea name="" id="" cols="130" rows="20">
+    * **includes() 方法**
+    * 定义：判断数组中是否含有某些成员，返回布尔值
+    * 语法：arr.includes(item,index)
+    * 参数：第一个参数是要查找的字符，第二个参数是开始搜索的位置（包含），默认 0 
+    * 匹配原则：基本遵循严格相等（===），但NaN判断会是相等
+    * 应用：去重
+    **Array.from() 方法**
+    * 将其他数据类型转换成数组
+    *  基本用法
+        * Array.from(arrayLike[, mapFn[, thisArg]])
+        * arrayLike 想要转换成数组的对象或可迭代对象
+        * mapFn 可选参数，如果指定了该参数，新数组中的每个元素会执行该回调函数，将得到的值放入返回的数组（相当于把 map功能集成在这个方法上）
+        * thisArg 可选参数，执行回调函数 mapFn 时 this 对象
+        * 返回一个新的**数组对象**
+    * 哪些可以通过 Array.from() 转换成数组
+        1. 所有可遍历的
+            * 数组、字符串、Set、Map、NodeList、arguments
+        2. 拥有 length 属性的任意对象
+    const obj = {
+        '0':'a',
+        '1':'b',
+        name:'Alex',
+        '3':'c',
+        length:2
+    };
+    console.log(Array.from(obj));   //["a", "b", undefined]
+    // length 决定最终数组的长度，并且只会转化数字键，不会转化非数字键
+    // 该类数组对象的属性名必须为数值型或字符串型的数字
+    **find() 和 findIndex() 方法**
+    * 定义：
+        * find()：找到满足条件的一个立即返回
+        * findIndex()：找到满足条件的一个，立即返回其索引
+    * 语法：
+        * arr.find(callback[, thisArg])
+            * callback 在数组每一项执行的函数，接受3个参数
+                * element 当前遍历到的元素
+                * index 可选，当前遍历到的索引
+                * array 可选，数组本身
+            * thisArg 可选，执行回调时用作 this 的对象
+            * 返回值：数组中第一个满足所提供测试函数的元素的值，否则返回 undefined。
+        * arr.findIndex(callback[, thisArg])
+            * callback 在数组每一项执行的函数，接受3个参数
+                * element 当前元素
+                * index 可选，当前元素的索引。
+                * array 可选，调用findIndex的数组。
+            * thisArg 可选，执行回调时用作 this 的对象
+            * 返回值：数组中通过提供测试函数的第一个元素的索引。否则，返回-1
+        * 应用
+    const a = [{
+                name:'张三',
+                sex:'男',
+                age:32
+            },{
+                name:'李四',
+                sex:'男',
+                age:23
+            },{
+                name:'说说',
+                sex:'女',
+                age:18
+            }];
+    console.log(a.find(value=>value.sex === '女'));   //{name:'说说',sex:'女',age:18}
+    console.log(a.findIndex(value=>value.sex === '女'));   //2
+  </textarea>
+
+  <h4>object</h4>
+  <textarea name="" id="" cols="130" rows="20">
+    * **Object.assign() 方法**
+    * 定义：用于将所有可枚举属性的值从一个或多个源对象分配到目标对象。它将返回目标对象。会修改目标对象
+    * 语法：Object.assign(target, ...sources)
+        * 参数 target：目标对象
+        * 参数 source：源对象
+        * 返回值：目标对象
+    * 注意事项
+        1. 基本数据类型作为源对象时，与对象的展开类似，先转换成对象，再合并
+            * 例：console.log(Object.assign({},'str')); //{0: "s", 1: "t", 2: "r"}
+        2. 同名属性的替换，后面的直接覆盖前面的
+    * 应用：
+        * 用于合并默认参数和用户参数
+* **Object.keys()、Object.values() 和 Object.entries()**
+    * 基本用法
+            let person = {
+                name:'Alex',
+                age:18
+            };
+            console.log(Object.keys(person));   // ["name", "age"]
+            console.log(Object.values(person));     // ["Alex", 18]
+            console.log(Object.entries(person));    // [['name','Alex'],['age',18]]
+    * 与数组类似方法的区别
+        1. 数组的key()、values()、entries()等方法是实例方法，而对象的key()、values()、entries()是构造函数的方法
+        2. 返回对象不同，数组方法返回 Iterator，对象方法返回的是数组
+    * 应用
+        * 使用 for...of 循环遍历对象
+            * 注意：这三种方法并不能保证顺序一定是你看到的样子，这一点和 for in 是一样的
+  </textarea>
+
+
+  <h4>总结</h4>
+  <ul>Array
+    <li>arr.keys()</li>
+    <li>arr.values()</li>
+    <li>arr.entries()</li>
+    <li>arr.include()</li>
+    <li>Array.from()</li>
+    <li>arr.find()</li>
+    <li>arr.findIndex()</li>
+  </ul>
+
+  <ul>String
+    <li>str.includes()</li>
+    <li>str.padStart()</li>
+    <li>str.padEnd()</li>
+    <li>str.trimLeft()</li>
+    <li>str.trimRight()</li>
+    <li>str.trimStart()</li>
+    <li>str.trimEnd()</li>
+    <li>str.trim()</li>
+  </ul>
+  <ul>Object
+    <li>obj.assign()</li>
+    <li>obj.keys()</li>
+    <li>obj.values()</li>
+    <li>obj.entries()</li>
+  </ul>
+</body>
+
+</html>

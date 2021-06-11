@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h3>es6</h3>
+  <p>变量:let</p>
+  <p>常量:const</p>
+  <p>模版字符串: `my name is ${name} /n(换行)`</p>
+  <p>矢印関数:　()=>{} ps:this指向全局</p>
+  <p>解构赋值 :const[a,b,c]=[1,2,3] console.log(a,b,c); //1,2,3</p>
+  <p>const[a[,,b],c]=[1,[2,3,4],5] console.log(a,b,c); //1,4,5</p>
+  <p>剩余参数 const[num,...args]=[1,2,3,4] //1  [2, 3, 4]</p>
+  <p>...arr 1.数组展开 const arr=[...'Tom'] console.log(arr); //["T", "o", "m"]<br>
+    2.复制 const a=[1,2]; const b=[...a]; console.log(b); //1,2 <br>
+    3.合并 const a =[1,2] const b=[3,4] ;console.log([...a,...b]); //[1,2,3,4]
+  </p>
+  <p>object</p>
+  <textarea name="" id="" cols="50" rows="15">
+    const logUser = userParam =>{
+      const defaultParam = {
+          username:'张三',
+          age:0,
+          sex:'male'
+      };
+      const param = { ...defaultParam ,...userParam};
+      console.log(param.username)
+  };
+  logUser() //张三
+  </textarea>
+
+  <p>reduce方法</p>
+  <p>reduce是数组的归并方法，这个方法与迭代方法一样，都会对数组进行遍历，不同的是reduce方法的回调函数中的第一个参数得到的是迭代计算后的结果，</p>
+  <p>应用</p>
+  <textarea name="" id="" cols="100" rows="20">
+    1.求和
+    let arr = [1, 2, 3, 4];
+    let sum = arr.reduce(function(acl, val) {
+    return acl+ val;
+    })
+    console.log(sum);
+    2.去重
+    // 数组去重
+    let arr = [12, 34, 34, 342, 345, 34, 123, 345, 45, 12]
+    let newArr = arr.reduce((prev, next) => {
+            // 判断数组中是否存在当前元素，如果不存在的话，再将其添加到数组中
+            prev.indexOf(next) == -1 && prev.push(next)
+            return prev
+        }, []) // 设置迭代初始值为一个空数组
+    // 原数组不会发生改变
+    console.log(arr) // [12, 34, 34, 342, 345, 34, 123, 345, 45, 12]
+    // 去除重复项的新数组
+    console.log(newArr) // [12, 34, 342, 345, 123, 45]
+  </textarea>
+
+  <h3>Set(集合 无序且唯一)</h3>
+  <textarea name="" id="" cols="100" rows="40">
+    可以理解是一个集合，和数组类似。Set是一系列**无序**、**没有重复值**的数据集合，没有下标去标示每一个值，无法通过下标访问值
+    const s = new Set();
+    * Set 实例的方法和属性
+        * 方法：
+            * add()方法
+                * 类似数组的push方法
+                * 每次只能添加一个
+                * 无法添加Set已有的成员
+                * 可以连续写
+                    * 例：const s = new Set(); s.add(1).add(2);
+            * has()方法
+                * 返回布尔值
+                * 判断是否有某个成员
+                    * 例：const s = new Set(); s.has(1);
+            * delete()方法
+                * 删除指定成员
+                * 删除不存在的成员，什么都不会发生，也不会报错
+                * 返回删除的成员，并且是 Set 类型
+                    * 例：const s = new Set(); s.add(1);s.delete(1) 
+            * clear()方法
+                * 删除所有的项 
+            * forEach()方法
+                * 按成员被添加进 Set 的顺序来遍历
+                * 语法：forEach(callback(value , key , set) , 对象)
+                * callback 是回调函数，是第一个参数  
+                * callback 中参数 value 就是 Set 中的值   
+                * callback 中参数 set 就是前面的 Set 
+                * 在 **Set** 中 value 和 key 永远相等
+                * forEach 的第二个参数可以改变回调函数的 this 指向
+                        const s = new Set();
+                        s.add(1).add(2);
+                        console.log(s)
+                        s.forEach(function(value,key,set){
+                            console.log(value,key,set === s)
+                        });
+        * 属性 ：
+            * size 
+            * 成员的个数
+                * 例：const s = new Set(); s.add(1); console.log(s.size); // 1
+    * Set 构造函数的参数
+        * **不能直接传数字**，否则会报错
+        * 数组
+                    const s = new Set([1,2,1]);
+                    console.log(s);         //Set(2) {1, 2}
+        * 字符串、arguments、NodeList、Set 等
+                    const s = new Set([1,2,1]);
+                    console.log( new Set(s) ) ; //Set(2) {1, 2}，相当于复制了一个 Set
+    * Set 注意事项
+        * 判断重复的方法
+            * Set 对重复值得判断基本遵循严格相等（===）
+            * 但是对于 NaN 的判断与 === 不同，Set 中 NaN 等于 NaN
+            * {} !== {}
+        * 什么时候使用 Set
+            1. 数组或字符去重时
+            2. 不需要通过下标访问，只需要遍历时
+            3. 为了使用 Set 提供的方法和属性时
+    * Set 的应用
+        * 数组去重
+                    const s = new Set([1,2,3,4,2,1]);
+                    console.log(s);     //Set(4) {1, 2, 3, 4}
+                    console.log([...s])     //(4) [1, 2, 3, 4]
+        * 字符串的去重
+                    const s = new Set('abbacbd');
+                    console.log(s);     //Set(4) {"a", "b", "c", "d"}
+                    console.log([...s].join(''))     //'abcd'
+        * 存放 Dom 元素
+        * 求交集
+        const set =new Set([1,2,4])
+        const set2 = new Set([2, 3]);
+        const set3 = new Set([...set].filter(item => set2.has(item)));
+        console.log(set3); //Set(1) {2}
+  </textarea>
+
+  <h3>Map(字典 键值对)</h3>
+  <textarea name="" id="" cols="100" rows="40">
+    Map 是映射的意思，和对象很像，Map 和对象都是键值对的集合
+    * 语法
+        * 没有字面量的方式创建 Map
+        * 只能使用构造函数创建
+                    const m = new Map();                   
+    * Map 和对象的区别
+        * 对象一般用字符串当作键
+        * 所有的数据类型都可以当做 Map 的键
+            * 基本数据类型：数字、字符、布尔值、undefined、null
+            * 引用数据类型：对象（[]、{}、函数、Set、Map 等）
+    * Map 实例的方法和属性
+        * 方法：
+            * set()
+                * 添加一个成员
+                * 可以连续写
+                * 两个参数：键和值，逗号分隔
+                * 使用 set 添加的新成员，键如果已经存在，后添加的键值对会覆盖已有的
+                  const m = new Map();
+                  m.set('age',18).set(true,'true');
+                  console.log(m);     //Map(2) {"age" => 18, true => "true"}
+            * get()
+                * 获取指定成员
+                            const m = new Map();
+                            m.set('age',18).set(true,'true');
+                            console.log(m.get(true));     // 'true'
+            * has()
+                * 判断有没有指定的键
+                * 返回布尔值
+                  const m = new Map();
+                  m.set('age',18).set(true,'true');
+                  console.log(m.has(true));     // true
+            * delete()
+                * 删除指定的键
+                * 返回被删除的键，并且是 Map 类型
+                * 删除不存在的键，什么都不会发生，也不会报错
+            * clear()
+                * 删除所有的键
+            * forEach()
+                * 遍历 Map
+                * 语法：forEach(callback(value , key , map) , 对象)
+                * callback 是回调函数，是第一个参数
+                * callback 中参数 value 就是 Map 中的值
+                * callback 中参数 map 就是前面的 Map
+                * 在 **Map** 中 key 就是键
+                * forEach 的第二个参数可以改变回调函数的 this 指向
+        * 属性
+            * size
+            * Map 有几个成员
+    * Map 构造函数的参数
+        * 数组（必须二维数组，并且必须体现出键和值）
+               console.log( new Map( [['name','Alex'] , ['age',18] ]));    //Map(2) {"name" => "Alex", "age" => 18}
+        * Set、Map等
+            * Set 中也必须体现出键和值
+                    const s = new Set([
+    
+                        ['name','Alex'],
+    
+                        ['age',18] 
+                    ]);
+                    console.log(new Map(s));    //Map(2) {"name" => "Alex", "age" => 18}
+                    console.log(s);     //Set(2) {Array(2), Array(2)}
+            * Map
+                * 相当于复制了一个新的 Map
+                      const m1 = new Map([
+                         ['name','Alex'] , 
+                         ['age',18]
+                      ]);
+                      console.log(m1);    //Map(2) {"name" => "Alex", "age" => 18}
+                      const m2 = new Map(m1);
+                      console.log(m2);    //Map(2) {"name" => "Alex", "age" => 18}
+                      console.log(m2 === m1);     //false
+    * Map 的注意事项
+        * 判断键名是否相同的方式
+            * 基本遵循严格相等（===）
+            * 例外就是 NaN，Map 中 NaN 也是等于 NaN
+        * 什么时候使用 Map
+            * 如果只需要 key -> value 的结构，或者需要字符串以外的值做键，使用 Map 更合适
+            * 只有模拟现实世界的实体时，才使用对象
+    * Map 的应用
+  </textarea>
+
+  <script>
+    const [num, ...args] = [1, 2, 3, 4];
+    console.log(num, args);
+    const arr = [...'Tom'];
+    console.log(arr);
+    const logUser = userParam => {
+      const defaultParam = {
+        username: '张三',
+        age: 0,
+        sex: 'male'
+      };
+      const param = {
+        ...defaultParam,
+        ...userParam
+      };
+      console.log(param.username)
+    };
+    logUser() //张三
+
+
+    const a = new Set([2, 3, 4]);
+    console.log(a.add(1)) //{2, 3, 4, 1};
+    console.log(a.has(5)); //false;
+    a.delete(3)
+    console.log(a); //{2, 4, 1}
+    a.forEach(function (value, key, set) {
+      console.log(value, key, set === a);
+    })
+    // a.clear()
+    // console.log(a); //{}
+    const set = new Set([1, 2, 4])
+    const set2 = new Set([2, 3]);
+    const set3 = new Set([...set].filter(item => set2.has(item)));
+    console.log(set3); //Set(1) {2}
+  </script>
+</body>
+
+</html>
