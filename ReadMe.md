@@ -14,6 +14,6 @@ Part6:原型链
 
 Part7:ES6(...arr,set,map)
 
-Part8:(ES6(Symbol,Iterator,newMethod))
+Part8:ES6(Symbol,Iterator,newMethod)
 
 Part9:Class
